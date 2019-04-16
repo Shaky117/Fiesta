@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/sitio_web" android:title="Sitio Web"/>
+    <item android:id="@+id/sitioWebContent" android:title="" />
+    <item android:id="@+id/facebook" android:title="Facebook"/>
+    <item android:id="@+id/facebookDetalles" android:title=""/>
+    <item android:id="@+id/telefono" android:title="Telefono"/>
+    <item android:id="@+id/telefonoDetalles" android:title=""/>
+</menu>
