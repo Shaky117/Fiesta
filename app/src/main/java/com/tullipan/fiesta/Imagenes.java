@@ -1,13 +1,11 @@
 package com.tullipan.fiesta;
 
-public class Categorias {
+public class Imagenes {
     private int id;
-    private String categoria;
     private String imagen;
 
-    public Categorias(int id, String categoria, String imagen) {
+    public Imagenes(int id, String imagen) {
         this.id = id;
-        this.categoria = categoria;
         this.imagen = imagen;
     }
 
@@ -25,13 +23,5 @@ public class Categorias {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
 }

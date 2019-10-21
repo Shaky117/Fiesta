@@ -28,6 +28,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
 import com.squareup.picasso.Picasso;
@@ -73,8 +74,7 @@ public class CategoriaActivity extends AppCompatActivity implements View.OnClick
 
         ImageView btnHome = findViewById(R.id.btnHome);
         ImageView btnSearch = findViewById(R.id.btnSearchCategoria);
-
-        //searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        TextView txtCategoria = findViewById(R.id.txtCategoriaName);
 
         bundle = getIntent().getExtras();
 
@@ -93,6 +93,9 @@ public class CategoriaActivity extends AppCompatActivity implements View.OnClick
             e.printStackTrace();
         }
 
+        String categoriaName = bundle.getString("categoriaNombre", "");
+        txtCategoria.setText(categoriaName);
+
         btnSearch.setOnClickListener(this);
         btnHome.setOnClickListener(this);
     }
@@ -105,84 +108,15 @@ public class CategoriaActivity extends AppCompatActivity implements View.OnClick
             @Override
             public void onItemClick(ProveedoresItem proveedoresItem) {
                 String id = String.valueOf(proveedoresItem.getId());
-                BackgroundWorker detalles = new BackgroundWorker(context);
-                String type = "detallesCategoria";
-                detalles.execute(type, id);
 
-                try {
-                    detalles.get();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                Intent detallesActivity = new Intent(CategoriaActivity.this, DetallesActivity.class);
+
+                detallesActivity.putExtra("id", id);
+                startActivity(detallesActivity);
             }
         });
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-    }
-
-    public void createBottomSheet(){
-
-        BottomSheet bottomSheet = new BottomSheet.Builder(context)
-                .title(this.nombreDetalles)
-                //.icon()
-                .sheet(R.menu.list)
-                .listener(new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
-                            case R.id.telefonoDetalles:
-                                Intent callIntent = new Intent(Intent.ACTION_DIAL);
-                                callIntent.setData(Uri.parse("tel:" + telefonoDetalles));
-                                startActivity(callIntent);
-                                break;
-                        }
-                    }
-                }).show();
-        Menu menu = bottomSheet.getMenu();
-        MenuItem telefono = menu.findItem(R.id.telefonoDetalles);
-        MenuItem facebook = menu.findItem(R.id.facebookDetalles);
-        MenuItem sitioWeb = menu.findItem(R.id.sitioWebContent);
-
-        telefono.setTitle(this.telefonoDetalles);
-        facebook.setTitle(this.facebookDetalles);
-        sitioWeb.setTitle(this.sitioDetalles);
-    }
-
-    public void fillDetallesList(String nombre, String sitio, String foto, String facebbok, String telefono, String instagram){
-        if(nombre.equals("null")){
-            nombre = "";
-        }
-
-        if(sitio.equals("null")){
-            sitio = "";
-        }
-
-        if(foto.equals("null")){
-            foto = "";
-        }
-
-        if(facebbok.equals("null")){
-            facebbok = "";
-        }
-
-        if(telefono.equals("null")){
-            telefono = "";
-        }
-
-        if(instagram.equals("null")){
-            instagram = "";
-        }
-
-        this.nombreDetalles = nombre;
-        this.sitioDetalles = sitio;
-        this.fotoDetalles = foto;
-        this.facebookDetalles = facebbok;
-        this.telefonoDetalles = telefono;
-        this.instagramDetalles = instagram;
-
-        createBottomSheet();
     }
 
     public void fillExampleList(int id, String nombre, String foto, int size) {
@@ -199,8 +133,7 @@ public class CategoriaActivity extends AppCompatActivity implements View.OnClick
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnHome:
-                startActivity(new Intent(CategoriaActivity.this, MainActivity.class));
-                finishAffinity();
+                finish();
                 break;
             case R.id.btnSearchCategoria:
                 int categoria = bundle.getInt("categoria", 0);

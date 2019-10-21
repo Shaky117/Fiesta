@@ -1,4 +1,19 @@
 <resources>
-    <string name="app_name">Fiesta</string>
+    <string name="app_name">Easy Party</string>
     <string name="categorias">Categorias</string>
+    <string name="title_activity_main_screen">MainScreen</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="olvidaste_contra">¿Olvidasté tu contraseña?</string>
+    <string name="register">Crear una cuenta</string>
+    <string name="registrarme">Registrarme</string>
+    <string name="noticias">Noticias</string>
+    <string name="usuario">Usuario</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="configuracion">Configuración de cuenta</string>
+    <string name="editar">Guardar</string>
+    <string name="mis_eventos">Mis eventos</string>
+    <string name="nuevo_evento">Nuevo Evento</string>
 </resources>

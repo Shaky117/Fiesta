@@ -3,6 +3,7 @@ package com.tullipan.fiesta;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
@@ -22,9 +23,11 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cocosw.bottomsheet.BottomSheet;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -224,21 +227,49 @@ public class ProveedoresActivity extends AppCompatActivity implements View.OnCli
                     public void onClick(DialogInterface dialog, int which) {
                         switch (which) {
                             case R.id.telefonoDetalles:
+
                                 Intent callIntent = new Intent(Intent.ACTION_DIAL);
                                 callIntent.setData(Uri.parse("tel:" + telefonoDetalles));
                                 startActivity(callIntent);
+                                break;
+                            case R.id.facebookDetalles:
+                                Uri uri = Uri.parse(facebookDetalles); // missing 'http://' will cause crashed
+                                Intent intent = new Intent(Intent.ACTION_VIEW);
+                                intent.setData(uri);
+                                startActivity(intent);
+                                break;
+                            case R.id.sitioWebContent:
+                                String urlSitio = sitioDetalles;
+                                Uri uriSitio = Uri.parse(urlSitio);
+                                Intent intentSitio= new Intent(Intent.ACTION_VIEW,uriSitio);
+                                startActivity(intentSitio);
                                 break;
                         }
                     }
                 }).show();
         Menu menu = bottomSheet.getMenu();
-        MenuItem telefono = menu.findItem(R.id.telefonoDetalles);
+        final MenuItem telefono = menu.findItem(R.id.telefonoDetalles);
         MenuItem facebook = menu.findItem(R.id.facebookDetalles);
-        MenuItem sitioWeb = menu.findItem(R.id.sitioWebContent);
+        final MenuItem sitioWeb = menu.findItem(R.id.sitioWebContent);
 
         telefono.setTitle(this.telefonoDetalles);
         facebook.setTitle(this.facebookDetalles);
         sitioWeb.setTitle(this.sitioDetalles);
+    }
+
+    public String getFacebookPageURL(Context context, String FACEBOOK_URL) {
+
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            int versionCode = packageManager.getPackageInfo("com.facebook.katana", 0).versionCode;
+            if (versionCode >= 3002850) { //newer versions of fb app
+                return "fb://facewebmodal/f?href=" + FACEBOOK_URL;
+            }else{
+                return FACEBOOK_URL;
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            return FACEBOOK_URL; //normal web url
+        }
     }
 
     public void fillDetallesList(String nombre, String sitio, String foto, String facebbok, String telefono, String instagram){
@@ -280,8 +311,7 @@ public class ProveedoresActivity extends AppCompatActivity implements View.OnCli
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.btnHome:
-                startActivity(new Intent(ProveedoresActivity.this, MainActivity.class));
-                finishAffinity();
+                finish();
                 break;
         }
     }

@@ -1,10 +1,15 @@
 package com.tullipan.fiesta;
+import android.content.Context;
+import android.graphics.Point;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.GridLayout;
@@ -18,6 +23,10 @@ import java.util.List;
 
 public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.ProveedoresViewHolder> implements Filterable {
 
+    private Context context;
+
+    String url= "http://admin.easyparty.mx";
+
     public interface OnItemClickListener {
         void onItemClick(ProveedoresItem proveedoresItem);
     }
@@ -27,12 +36,14 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
     private OnItemClickListener listener;
 
     class ProveedoresViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         ImageView imageView;
         TextView textView1;
         TextView textView2;
 
         ProveedoresViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.cvCategoria);
             imageView = itemView.findViewById(R.id.ivItemProveedores);
             textView1 = itemView.findViewById(R.id.txtItemProveedores);
         }
@@ -54,6 +65,7 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
     @NonNull
     @Override
     public ProveedoresViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_proveedores,
                 parent, false);
         return new ProveedoresViewHolder(v);
@@ -62,8 +74,11 @@ public class ProveedoresAdapter extends RecyclerView.Adapter<ProveedoresAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProveedoresViewHolder holder, int position) {
         ProveedoresItem currentItem = proveedoresList.get(position);
-        String foto_url = "http://fiesta.mawetecnologias.com/img/uploads/" + currentItem.getFoto();
-        Picasso.get().load(foto_url).into(holder.imageView);
+        String foto_url = url + "/img/uploads/" + currentItem.getFoto();
+
+        Picasso.with(context)
+                .load(foto_url)
+                .into(holder.imageView);
         holder.textView1.setText(currentItem.getName());
         holder.bind(proveedoresList.get(position), listener);
     }

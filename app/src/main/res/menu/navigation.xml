@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_noticias"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/noticias" />
+
+    <item
+        android:id="@+id/navigation_categorias"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="@string/categorias" />
+
+    <item
+        android:id="@+id/navigation_usuarios"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="@string/usuario" />
+
+</menu>

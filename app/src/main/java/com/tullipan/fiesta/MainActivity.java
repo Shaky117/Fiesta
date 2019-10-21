@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             window.setStatusBarColor(this.getResources().getColor(R.color.fiestaBackground));
         }
 
-
         ImageView btnSearch = findViewById(R.id.btnSearch);
         BackgroundWorker backgroundWorker = new BackgroundWorker(this);
         String type = "categorias";
@@ -75,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intent = new Intent(MainActivity.this, CategoriaActivity.class);
                 Bundle bundle = new Bundle();
                 bundle.putInt("categoria", categorias.getId());
+                bundle.putString("categoriaNombre", categorias.getCategoria());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
@@ -83,11 +83,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         recyclerView.setAdapter(adapter);
     }
 
-    public void fillExampleList(int id, String nombre, int size) {
+    public void fillExampleList(int id, String nombre, String imagen,int size) {
 
         String foto = "";
 
-        categoriasList.add(new Categorias(id, nombre));
+        categoriasList.add(new Categorias(id, nombre, imagen));
 
         if(this.size < size - 1){
             this.size++;

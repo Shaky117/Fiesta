@@ -11,6 +11,11 @@ public class ProveedoresItem {
         this.foto = foto;
     }
 
+    public ProveedoresItem(int id, String nombre){
+        this.id = id;
+        this.name = nombre;
+    }
+
     public int getId() {
         return id;
     }

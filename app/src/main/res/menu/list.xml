@@ -6,4 +6,5 @@
     <item android:id="@+id/facebookDetalles" android:title=""/>
     <item android:id="@+id/telefono" android:title="Telefono"/>
     <item android:id="@+id/telefonoDetalles" android:title=""/>
+
 </menu>

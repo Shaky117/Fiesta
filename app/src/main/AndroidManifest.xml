@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tullipan.fiesta"
-    >
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+    android:versionCode="2"
+    android:versionName="Easy Party">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_fiesta_launcher"
         android:label="@string/app_name"
-        android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_fiesta_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="${applicationId}.com.vansuita.pickimage.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/picker_provider_paths" />
+        </provider>
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/SplashTheme"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".ProveedoresActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CategoriaActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".DetallesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainScreen"
+            android:label="@string/title_activity_main_screen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LoginAcitivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,11 +53,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ProveedoresActivity"
-            android:screenOrientation="portrait"/>
         <activity
+            android:name=".RegisterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".EditActivity"
+            android:screenOrientation="portrait" />
+        <activity android:name=".NoticiaActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".EventoActivity"
             android:screenOrientation="portrait"
-            android:name=".CategoriaActivity"></activity>
+            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".ListProveedoresActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".NuevoEventoActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustNothing"></activity>
     </application>
 
 </manifest>
