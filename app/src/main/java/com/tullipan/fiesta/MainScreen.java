@@ -124,6 +124,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         rvEventos = usuarioLayout.findViewById(R.id.rvEventos);
 
         ImageView btnEdit = usuarioLayout.findViewById(R.id.btnEdit);
+        ImageView btnLogout = usuarioLayout.findViewById(R.id.btnLogout);
         Button btnNewEvent = usuarioLayout.findViewById(R.id.btnNewEvent);
         userImage = usuarioLayout.findViewById(R.id.ivUser);
         tvNombre = usuarioLayout.findViewById(R.id.tvNombre);
@@ -140,6 +141,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         btnEdit.setOnClickListener(this);
         btnNewEvent.setOnClickListener(this);
         btnSearch.setOnClickListener(this);
+        btnLogout.setOnClickListener(this);
     }
 
     public void setUpUser(String nombre, String imagen, String corre){
@@ -270,6 +272,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 break;
             case R.id.btnSearch:
                 startActivity(new Intent(MainScreen.this, ProveedoresActivity.class));
+                break;
+            case R.id.btnLogout:
+                SharedPreferences sharedPreferences = getSharedPreferences("MyValuesLogin", Context.MODE_PRIVATE);
+                sharedPreferences.edit().clear().commit();
+                finish();
+                startActivity(new Intent(MainScreen.this, LoginAcitivity.class));
                 break;
         }
     }

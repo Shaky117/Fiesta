@@ -25,6 +25,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@color/fiestaBackground" />
 
+    <ImageView
+        android:id="@+id/btnLogout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:tint="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/exit" />
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivUser"
         android:layout_width="100dp"

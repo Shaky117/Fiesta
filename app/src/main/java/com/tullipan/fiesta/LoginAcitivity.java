@@ -40,6 +40,7 @@ public class LoginAcitivity extends AppCompatActivity implements View.OnClickLis
         if(!token.equals("")){
             Intent bypass = new Intent(LoginAcitivity.this, MainScreen.class);
             startActivity(bypass);
+            finish();
         }
 
         if (android.os.Build.VERSION.SDK_INT >= 21) {
